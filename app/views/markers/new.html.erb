@@ -1,0 +1,11 @@
+
+<h3>Add a marker</h3>
+
+<%= simple_form_for @marker do |form| %>
+
+	<%= form.input :title %>
+	<%= form.input :location %>
+
+	<%= form.button :submit %>
+
+<% end %>

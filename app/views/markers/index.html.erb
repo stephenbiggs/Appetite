@@ -1,0 +1,41 @@
+<section id="info">
+
+			<header>
+		 		<h1><a href="#">Appetite</a></h1>
+				<h2>London's best places</h2>
+		  	</header>
+
+		  	<!-- this is the search form -->
+		  	<form action="/" method="get">
+		  		<input type="text" name="search">
+		  	</form>
+
+			<ul>
+				<% @markers.each do |marker| %>		
+							<li data-lat="<%= marker.latitude %>" data-lng="<%= marker.longitude %>">
+					     		<h3><%= marker.title %></h3>
+					        <p><%= marker.location %></p>
+
+					        <!-- if there's a search calculate how far from the search the marker is -->
+					        <% if params[:search].present? %>
+
+					        	<p>
+					        		<%= marker.distance_to(params[:search]).round(1) %>
+					        		km away
+					        	</p>
+
+					        <% end %>
+
+					        	<%= link_to "Delete", marker_path(marker), method: :delete %>
+
+					     </li>
+				<% end %>
+
+		  </ul>
+
+
+		</section>
+
+		<section id="map"></section>
+
+		<%= link_to "Add a marker", new_marker_path, class: "button" %>
